@@ -1,0 +1,24 @@
+ansible_python_interpreter: /usr/bin/python3
+# interpreter in all nodes
+
+elastic_version: 6
+# use version 6 or 7
+
+cluster_name: production
+port: 9200
+
+data_path: /var/lib/elasticsearch
+
+master:
+- hostname: zu-elk-master1
+  address: 10.100.100.21
+- hostname: zu-elk-master2
+  address: 10.100.100.22
+- hostname: zu-elk-master3
+  address: 10.100.100.23
+
+data:
+- hostname: zu-elk-data1
+  address: 10.100.100.24
+- hostname: zu-elk-data2
+  address: 10.100.100.25

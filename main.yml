@@ -1,0 +1,14 @@
+- name: Setup Environment
+  hosts: master,data
+  roles:
+  - env
+
+- name: Bootstraping Master Nodes
+  hosts: master
+  roles:
+  - master
+
+- name: Bootstraping Data Nodes
+  hosts: data
+  roles:
+  - data

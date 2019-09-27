@@ -1,0 +1,14 @@
+cluster.name: {{ cluster_name }}
+bootstrap.memory_lock: true
+
+node.name: \${HOSTNAME}
+node.master: true
+node.data: false
+
+network.host: {% for node in master %}{%if inventory_hostname == node.hostname %}{{ node.address }}{% endif %}{% endfor %}
+http.port: {{ port }}
+
+path.logs: /var/log/elasticsearch
+
+discovery.zen.ping.unicast.hosts: [{% for node in master %}"{{ node.hostname }}"{% if not loop.last %},{% endif %}{% endfor %}]
+discovery.zen.minimum_master_nodes: 2

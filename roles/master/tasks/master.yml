@@ -1,0 +1,45 @@
+- name: Create master configuration
+  template:
+    src: "elasticsearch.yml.j2"
+    dest: "/etc/elasticsearch/elasticsearch.yml"
+
+- name: Create master configuration
+  template:
+    src: "elasticsearch.j2"
+    dest: "/etc/default/elasticsearch"
+
+- name: Ensure that pages are not swapped out to disk by requesting the JVM to lock the heap in memory
+  shell: crudini --set /usr/lib/systemd/system/elasticsearch.service Service LimitMEMLOCK infinity
+
+- name: Set the maxiumim file descriptor number
+  shell: crudini --set /usr/lib/systemd/system/elasticsearch.service Service LimitNOFILE 65535
+  
+- name: Increase the number of threads 
+  shell: crudini --set /usr/lib/systemd/system/elasticsearch.service Service LimitNPROC 4096
+
+- name: Increase the limit on the number of open files descriptors to user elasticsearch
+  pam_limits:
+    domain: elasticsearch
+    limit_type: soft
+    limit_item: memlock
+    value: unlimited
+
+- name: Increase the limit on the number of open files descriptors to user elasticsearch
+  pam_limits:
+    domain: elasticsearch
+    limit_type: hard
+    limit_item: memlock
+    value: unlimited
+
+- sysctl:
+    name: vm.max_map_count
+    value: 262144
+    state: present
+    reload: yes
+
+- name: Start elasticsearch
+  systemd:
+    name: elasticsearch
+    state: restarted
+    daemon_reload: yes
+    enabled: yes
