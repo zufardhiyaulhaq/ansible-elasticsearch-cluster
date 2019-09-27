@@ -11,6 +11,7 @@ network.host: {% for node in master %}{%if inventory_hostname == node.hostname %
 http.port: {{ port }}
 
 path.logs: /var/log/elasticsearch
+path.data: /var/lib/elasticsearch
 
 discovery.zen.ping.unicast.hosts: [{% for node in master %}"{{ node.hostname }}"{% if not loop.last %},{% endif %}{% endfor %}]
 discovery.zen.minimum_master_nodes: 2
