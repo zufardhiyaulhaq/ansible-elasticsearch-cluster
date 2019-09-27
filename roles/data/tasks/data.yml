@@ -11,6 +11,14 @@
     state: directory
   when: folder_detail.stat.exists == False
 
+- name: Creates directory nodes
+  file:
+    path: {{ data_path }}/nodes/
+    owner: elasticsearch
+    group: elasticsearch
+    state: directory
+  when: folder_detail.stat.exists == False
+
 - name: Create data configuration
   template:
     src: "elasticsearch.yml.j2"

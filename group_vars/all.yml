@@ -7,18 +7,19 @@ elastic_version: 6
 cluster_name: production
 port: 9200
 
-data_path: /var/lib/elasticsearch
+data_path: /data
+# without backslash
 
 master:
 - hostname: zu-elk-master1
-  address: 10.100.100.21
+  address: 10.200.200.11
 - hostname: zu-elk-master2
-  address: 10.100.100.22
+  address: 10.200.200.12
 - hostname: zu-elk-master3
-  address: 10.100.100.23
+  address: 10.200.200.13
 
 data:
 - hostname: zu-elk-data1
-  address: 10.100.100.24
+  address: 10.200.200.14
 - hostname: zu-elk-data2
-  address: 10.100.100.25
+  address: 10.200.200.15
