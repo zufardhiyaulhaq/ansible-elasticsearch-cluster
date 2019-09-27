@@ -6,6 +6,8 @@ node.master: false
 node.data: true
 
 network.host: {% for node in master %}{%if inventory_hostname == node.hostname %}{{ node.address }}{% endif %}{% endfor %}
+
+
 http.port: {{ port }}
 
 path.logs: /var/log/elasticsearch

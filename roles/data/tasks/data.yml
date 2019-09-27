@@ -1,11 +1,11 @@
 - name: check folder exist
   stat:
-    path: {{ data_path }}
+    path: "{{ data_path }}"
   register: folder_detail
 
 - name: Creates directory
   file:
-    path: {{ data_path }}
+    path: "{{ data_path }}"
     owner: elasticsearch
     group: elasticsearch
     state: directory
@@ -13,7 +13,7 @@
 
 - name: Creates directory nodes
   file:
-    path: {{ data_path }}/nodes/
+    path: "{{ data_path }}/nodes/"
     owner: elasticsearch
     group: elasticsearch
     state: directory
