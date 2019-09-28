@@ -27,7 +27,7 @@
 - name: Create data configuration
   template:
     src: "elasticsearch.j2"
-    dest: "/etc/default/elasticsearch"
+    dest: "/etc/sysconfig/elasticsearch"
 
 - name: Ensure that pages are not swapped out to disk by requesting the JVM to lock the heap in memory
   shell: crudini --set /usr/lib/systemd/system/elasticsearch.service Service LimitMEMLOCK infinity
